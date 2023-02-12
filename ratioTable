@@ -1,0 +1,6 @@
+'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (
+    id INTEGER PRIMARY KEY, disease TEXT NOT NULL,
+    cannabis_experience BOOLEAN NOT NULL,
+    cannabis_type TEXT NOT NULL,
+    ratio TEXT NOT NULL
+    )'

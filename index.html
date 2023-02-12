@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<style>
+  body {
+    background-color: #6b95f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .question {
+    border: 1px solid;
+    border-color: #d1d1d1;
+    width: 50vw;
+    min-width: 30vw;
+    margin-top: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  form>div {
+    margin: 0.6rem 1rem
+  }
+
+  select {
+    background-color: #d1d1d1;
+    width: 13em;
+  }
+
+  input,
+  textarea {
+    background-color: #d1d1d1;
+  }
+
+  #result {
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
+  .answers {
+    /* position: fixed; */
+    margin-top: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    /* align-items: center; */
+  }
+
+  td>label {
+    /* text-align: center; */
+    margin-left: 1rem;
+  }
+
+  #submit {
+    margin-top: 1rem;
+  }
+
+  output {
+    color: #d1d1d1a1;
+    font-weight: 600;
+    margin-left: 20%;
+  }
+
+  input[type=range]::-webkit-slider-thumb:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: red;
+  }
+
+  input[type=range][value="4"]:before {
+    background-color: yellow;
+  }
+
+  input[type=range][value="5"]:before {
+    background-color: yellow;
+  }
+
+  input[type=range][value="6"]:before {
+    background-color: yellow;
+  }
+
+  input[type=range][value="7"]:before {
+    background-color: green;
+  }
+
+  input[type=range][value="8"]:before {
+    background-color: green;
+  }
+
+  input[type=range][value="9"]:before {
+    background-color: green;
+  }
+
+  input[type=range][value="10"]:before {
+    background-color: green;
+  }
+</style>
+<script src="/lib/sql-wasm.js"></script>
+
+<body>
+  <div class="question">
+    <form>
+      <div>
+        <label>
+          Age:
+        </label>
+        <input class="answers" type="number" min="0" name="age" />
+      </div>
+      <div>
+        <label>
+          Gender:
+        </label>
+        <select class="answers" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="non-specific">Non specific</option>
+        </select>
+      </div>
+      <div>
+        <label>
+          Height (cm):
+        </label>
+        <input class="answers" type="number" min="0" name="height" />
+      </div>
+      <div>
+        <label>
+          Weight (kg):
+        </label>
+        <input class="answers" type="number" min="0" name="weight" />
+      </div>
+      <div>
+        <label>
+          Diseases:
+        </label>
+        <select class="answers" name="disease">
+        </select>
+      </div>
+      <div>
+        <label>
+          Cannabis experience:
+        </label>
+        <input type="radio" name="cannabis_experience" value="yes" />
+        <label>
+          Yes
+        </label>
+        <input type="radio" name="cannabis_experience" value="no" />
+        <label>
+          No
+        </label>
+      </div>
+    </form>
+    <form>
+
+      <table>
+
+        <tr>
+          <td>
+            <label>
+              Pain:
+            </label>
+          </td>
+          <td>
+            <output id="painValue">0</output><br>
+            <input type="range" min="0" max="10" name="pain" value="0" oninput="painValue.value = this.value" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>
+              Sleep:
+            </label>
+          </td>
+          <td>
+            <output id="sleepValue">0</output><br>
+            <input type="range" min="0" max="10" name="sleep" value="0" oninput="sleepValue.value = this.value" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>
+              Anxiety:
+            </label>
+          </td>
+          <td>
+            <output id="anxietyValue">0</output><br>
+            <input type="range" min="0" max="10" name="anxiety" value="0" oninput="anxietyValue.value = this.value" />
+          </td>
+        </tr>
+      </table>
+  </div>
+  <div>
+    <button id="submit" type="submit"
+      onclick="event.preventDefault(), getBestCannabisTreatmentForPatient(document.getElementsByName('age')[0].value, document.getElementsByName('gender')[0].value, document.getElementsByName('height')[0].value, document.getElementsByName('weight')[0].value, document.getElementsByName('disease')[0].value, document.getElementsByName('pain')[0].value, document.getElementsByName('sleep')[0].value, document.getElementsByName('anxiety')[0].value);">Submit</button>
+  </div>
+  </form>
+</body>
+<script>
+  const diseasesList = ["Nociceptive", "Noxious Pain", "Opioid Dependancy", "Alzeihmer's with agitation", "Tics", "Tourerre's", "HRV", "AIDS", "Insomania", "Cachexia", "Osteoarthritis", "Stress", "Depression", "Fibromyalgia", "Social Phobia", "Multiple Sclerosis", "Muscle Spasms", "PTSD", "OCD", "Anxiety Disorder", "Crohn's", "Dravet Syndrome", "Lennox-Gastraut Syndrome", "Acne Vulgaris", "Epilepsy", "Psychosis", "Schizophrenia"];
+
+
+  var createTableString = 'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (disease, cannabis_experience, cannabis_type, ratio)'
+
+
+  var insertString = 'insert into "RetioConfigurator"(disease,cannabis_experience,cannabis_type,ratio) \
+      values("PTSD", false,"cbd","3:1"),\
+      ("PTSD", true,"cbd","15:1"),\
+      ("PTSD", false,"cbd","3:1"),\
+      ("insomenia", true,"thc","15:1"),\
+      ("insomenia", false,"thc","3:1")'
+
+
+
+  function buildDiseasesOptins() {
+    const select = document.querySelector("select[name='disease']");
+    for (let i = 0; i < diseasesList.length; i++) {
+      const option = document.createElement("option");
+      option.innerHTML = diseasesList[i];
+      select.appendChild(option);
+    }
+
+  }
+
+  // function cannabisRecommendation(input) {
+  //   var symptoms = input.Symptom;
+  //   var disease = input.Disease;
+  //   var age = input.Age
+  //   var cannabisExperience = input["Cannabis experience"];
+  //   console.log('input["Cannabis experience"]', input["Cannabis experience"]);
+  //   bmi = input.Weight / ((input.Height / 100) ** 2)
+
+
+
+
+
+
+  //   // var defaultQuentity = 5
+  //   // if (symptoms["Pain"] >= 7 || symptoms["Anxiety"] >= 7 || symptoms["Sleep"] < 5 || bmi > 27) {
+  //   //   defaultQuentity * 2
+  //   // }
+  //   // if (bmi < 20 || age > 60 || age < 21) {
+  //   //   defaultQuentity / 2
+  //   // }
+
+  // }
+
+  function getBestCannabisTreatmentForPatient(age, gender, height, weight, disease, pain, sleep, anxiety) {
+    let radioButton = document.querySelector('input[name="cannabis_experience"]:checked');
+    let cannabisExperience = radioButton.value;
+    var userAnswer = { "Age:": age, "Gender": gender, "Height": height, "Weight": weight, "Disease": disease, "Cannabis experience": cannabisExperience, "Symptom": { "Pain": pain, "Sleep": sleep, "Anxiety": anxiety } }
+    console.log(userAnswer);
+    // cannabisRecommendation(userAnswer)
+    // return cannabisRecommendation(userAnswer)
+  }
+
+  // function cannabisRecommendation(userAnswer)
+
+    
+    
+
+
+
+
+
+  config = {
+    locateFile: (filename) => `https://sql.js.org/dist/${filename}`,
+  }
+  initSqlJs(config).then(function (SQL) {
+
+    //Create the database
+    const db = new SQL.Database()
+    // CREATE TABLE
+    db.run(createTableString)
+
+    // Insert 
+    db.run(insertString)
+
+
+    // Prepare an sql statement
+    // const stmt = db.prepare(`SELECT * FROM "RetioConfigurator" WHERE disease=${} AND cannabis_experience=${}`);
+
+    // Bind values to the parameters and fetch the results of the query
+    const result = stmt.getAsObject({});
+    console.log(result);
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+  function init() {
+    // build menu od diseases
+    buildDiseasesOptins()
+  }
+
+  init()
+</script>
+
+
+
+
+
+</html>

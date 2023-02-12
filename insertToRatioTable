@@ -1,0 +1,6 @@
+'insert into "RetioConfigurator"(disease,cannabis_experience,cannabis_type,ratio)
+ ("PTSD", false,"cbd","3:1"),
+ ("PTSD", true,"cbd","15:1"),
+ ("PTSD", false,"cbd","3:1"),
+ ("insomenia", true,"thc","15:1"),
+ ("insomenia", false,"thc","3:1")'
