@@ -243,12 +243,6 @@
   //   var cannabisExperience = input["Cannabis experience"];
   //   console.log('input["Cannabis experience"]', input["Cannabis experience"]);
   //   bmi = input.Weight / ((input.Height / 100) ** 2)
-
-
-
-
-
-
   //   // var defaultQuentity = 5
   //   // if (symptoms["Pain"] >= 7 || symptoms["Anxiety"] >= 7 || symptoms["Sleep"] < 5 || bmi > 27) {
   //   //   defaultQuentity * 2
@@ -266,6 +260,7 @@
     console.log(userAnswer);
     // cannabisRecommendation(userAnswer)
     // return cannabisRecommendation(userAnswer)
+    return userAnswer
   }
 
   // function cannabisRecommendation(userAnswer)
@@ -290,9 +285,10 @@
     // Insert 
     db.run(insertString)
 
-
+    const {Age,Gender} = getBestCannabisTreatmentForPatient()
     // Prepare an sql statement
     // const stmt = db.prepare(`SELECT * FROM "RetioConfigurator" WHERE disease=${} AND cannabis_experience=${}`);
+    const stmt = db.prepare(`SELECT * FROM "RetioConfigurator" WHERE disease="PTSD" AND cannabis_experience=true`);
 
     // Bind values to the parameters and fetch the results of the query
     const result = stmt.getAsObject({});
