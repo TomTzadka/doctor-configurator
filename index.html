@@ -214,11 +214,173 @@
   const diseasesList = ["Nociceptive", "Noxious Pain", "Opioid Dependancy", "Alzeihmer's with agitation", "Tics", "Tourerre's", "HRV", "AIDS", "Insomania", "Cachexia", "Osteoarthritis", "Stress", "Depression", "Fibromyalgia", "Social Phobia", "Multiple Sclerosis", "Muscle Spasms", "PTSD", "OCD", "Anxiety Disorder", "Crohn's", "Dravet Syndrome", "Lennox-Gastraut Syndrome", "Acne Vulgaris", "Epilepsy", "Psychosis", "Schizophrenia"];
 
 
-  var createTableString = 'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (disease, cannabis_experience, cannabis_type, ratio, bmi, age ,quantity)'
+  var createTableString = 'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (disease, cannabis_experience, cannabis_type, ratio, bmi, quantity)'
 
 
   var insertString = `insert into "RetioConfigurator"(disease,cannabis_experience,cannabis_type,ratio) \
-      values("Nociceptive", true, "thc", "15:1"),("Noxious Pain", true, "thc", "15:1"),("Opioid Dependancy", true, "thc", "15:1"),("Alzeihmer's with agitation", true, "thc", "15:1"),("Tics", true, "thc", "15:1"),("Tourerre's", true, "thc", "15:1"),("HRV", true, "thc", "15:1"),("AIDS", true, "thc", "15:1"),("Insomania", true, "thc", "15:1"),("Cachexia", true, "thc", "15:1"),("Osteoarthritis", true, "thc", "15:1"),("Nociceptive", false, "thc", "3:1"),("Noxious Pain", false, "thc", "3:1"),("Opioid Dependancy", false, "thc", "3:1"),("Alzeihmer's with agitation", false, "thc", "3:1"),("Tics", false, "thc", "3:1"),("Tourerre's", false, "thc", "3:1"),("HRV", false, "thc", "3:1"),("AIDS", false, "thc", "3:1"),("Insomania", false, "thc", "3:1"),("Cachexia", false, "thc", "3:1"),("Osteoarthritis", false, "thc", "3:1"),("Stress", true, "balnce", "1:1"),("Depression", true, "balnce", "1:1"),("Fibromyalgia", true, "balnce", "1:1"),("Social Phobia", true, "balnce", "1:1"),("Multiple Sclerosis", true, "balnce", "1:1"),("Muscle Spasms", true, "balnce", "1:1"),("PTSD", true, "balnce", "1:1"),("Stress", false, "balnce", "1:1"),("Depression", false, "balnce", "1:1"),("Fibromyalgia", false, "balnce", "1:1"),("Social Phobia", false, "balnce", "1:1"),("Multiple Sclerosis", false, "balnce", "1:1"),("Muscle Spasms", false, "balnce", "1:1"),("PTSD", false, "balnce", "1:1"),("OCD", true, "cbd", "3:1"),("Anxiety Disorder", true, "cbd", "3:1"),("Crohn's", true, "cbd", "3:1"),("Dravet Syndrome", true, "cbd", "3:1"),("Lennox-Gastraut Syndrome", true, "cbd", "3:1"),("Acne Vulgaris", true, "cbd", "3:1"),("Epilepsy", true, "cbd", "3:1"),("Psychosis", true, "cbd", "3:1"),("Schizophrenia",true, "cbd", "3:1"),("OCD", false, "cbd", "15:1"),("Anxiety Disorder", false, "cbd", "15:1"),("Crohn's", false, "cbd", "15:1"),("Dravet Syndrome", false, "cbd", "15:1"),("Lennox-Gastraut Syndrome", false, "cbd", "15:1"),("Acne Vulgaris", false, "cbd", "15:1"),("Epilepsy", false, "cbd", "15:1"),("Psychosis", false, "cbd", "15:1"),("Schizophrenia",false, "cbd", "15:1")`
+      values\
+      ("Nociceptive", true, "thc", "15:1", 23, "5ml"),\
+("Noxious Pain", true, "thc", "15:1", 23, "5ml"),\
+("Opioid Dependancy", true, "thc", "15:1", 23, "5ml"),\
+("Alzeihmer's with agitation", true, "thc", "15:1", 23, "5ml"),\
+("Tics", true, "thc", "15:1", 23, "5ml"),\
+("Tourerre's", true, "thc", "15:1", 23, "5ml"),\
+("HRV", true, "thc", "15:1", 23, "5ml"),\
+("AIDS", true, "thc", "15:1", 23, "5ml"),\
+("Insomania", true, "thc", "15:1", 23, "5ml"),\
+("Cachexia", true, "thc", "15:1", 23, "5ml"),\
+("Osteoarthritis", true, "thc", "15:1", 23, "5ml"),\
+("Nociceptive", false, "thc", "3:1", 23, "5ml"),\
+("Noxious Pain", false, "thc", "3:1", 23, "5ml"),\
+("Opioid Dependancy", false, "thc", "3:1", 23, "5ml"),\
+("Alzeihmer's with agitation", false, "thc", "3:1", 23, "5ml"),\
+("Tics", false, "thc", "3:1", 23, "5ml"),\
+("Tourerre's", false, "thc", "3:1", 23, "5ml"),\
+("HRV", false, "thc", "3:1", 23, "5ml"),\
+("AIDS", false, "thc", "3:1", 23, "5ml"),\
+("Insomania", false, "thc", "3:1", 23, "5ml"),\
+("Cachexia", false, "thc", "3:1", 23, "5ml"),\
+("Osteoarthritis", false, "thc", "3:1", 23, "5ml"),\
+("Nociceptive", true, "thc", "15:1", 27, "10ml"),\
+("Noxious Pain", true, "thc", "15:1", 27, "10ml"),\
+("Opioid Dependancy", true, "thc", "15:1", 27, "10ml"),\
+("Alzeihmer's with agitation", true, "thc", "15:1", 27, "10ml"),\
+("Tics", true, "thc", "15:1", 27, "10ml"),\
+("Tourerre's", true, "thc", "15:1", 27, "10ml"),\
+("HRV", true, "thc", "15:1", 27, "10ml"),\
+("AIDS", true, "thc", "15:1", 27, "10ml"),\
+("Insomania", true, "thc", "15:1", 27, "10ml"),\
+("Cachexia", true, "thc", "15:1", 27, "10ml"),\
+("Osteoarthritis", true, "thc", "15:1", 27, "10ml"),\
+("Nociceptive", false, "thc", "3:1", 27, "10ml"),\
+("Noxious Pain", false, "thc", "3:1", 27, "10ml"),\
+("Opioid Dependancy", false, "thc", "3:1", 27, "10ml"),\
+("Alzeihmer's with agitation", false, "thc", "3:1", 27, "10ml"),\
+("Tics", false, "thc", "3:1", 27, "10ml"),\
+("Tourerre's", false, "thc", "3:1", 27, "10ml"),\
+("HRV", false, "thc", "3:1", 27, "10ml"),\
+("AIDS", false, "thc", "3:1", 27, "10ml"),\
+("Insomania", false, "thc", "3:1", 27, "10ml"),\
+("Cachexia", false, "thc", "3:1", 27, "10ml"),\
+("Osteoarthritis", false, "thc", "3:1", 27, "10ml"),\
+("Nociceptive", true, "thc", "15:1", 20, "2.5ml"),\
+("Noxious Pain", true, "thc", "15:1", 20, "2.5ml"),\
+("Opioid Dependancy", true, "thc", "15:1", 20, "2.5ml"),\
+("Alzeihmer's with agitation", true, "thc", "15:1", 20, "2.5ml"),\
+("Tics", true, "thc", "15:1", 20, "2.5ml"),\
+("Tourerre's", true, "thc", "15:1", 20, "2.5ml"),\
+("HRV", true, "thc", "15:1", 20, "2.5ml"),\
+("AIDS", true, "thc", "15:1", 20, "2.5ml"),\
+("Insomania", true, "thc", "15:1", 20, "2.5ml"),\
+("Cachexia", true, "thc", "15:1", 20, "2.5ml"),\
+("Osteoarthritis", true, "thc", "15:1", 20, "2.5ml"),\
+("Nociceptive", false, "thc", "3:1", 20, "2.5ml"),\
+("Noxious Pain", false, "thc", "3:1", 20, "2.5ml"),\
+("Opioid Dependancy", false, "thc", "3:1", 20, "2.5ml"),\
+("Alzeihmer's with agitation", false, "thc", "3:1", 20, "2.5ml"),\
+("Tics", false, "thc", "3:1", 20, "2.5ml"),\
+("Tourerre's", false, "thc", "3:1", 20, "2.5ml"),\
+("HRV", false, "thc", "3:1", 20, "2.5ml"),\
+("AIDS", false, "thc", "3:1", 20, "2.5ml"),\
+("Insomania", false, "thc", "3:1", 20, "2.5ml"),\
+("Cachexia", false, "thc", "3:1", 20, "2.5ml"),\
+("Osteoarthritis", false, "thc", "3:1", 20, "2.5ml"),\
+("Stress", true, "balnce", "1:1", 23, "5ml"),\
+("Depression", true, "balnce", "1:1", 23, "5ml"),\
+("Fibromyalgia", true, "balnce", "1:1", 23, "5ml"),\
+("Social Phobia", true, "balnce", "1:1", 23, "5ml"),\
+("Multiple Sclerosis", true, "balnce", "1:1", 23, "5ml"),\
+("Muscle Spasms", true, "balnce", "1:1", 23, "5ml"),\
+("PTSD", true, "balnce", "1:1", 23, "5ml"),\
+("Stress", false, "balnce", "1:1", 23, "5ml"),\
+("Depression", false, "balnce", "1:1", 23, "5ml"),\
+("Fibromyalgia", false, "balnce", "1:1", 23, "5ml"),\
+("Social Phobia", false, "balnce", "1:1", 23, "5ml"),\
+("Multiple Sclerosis", false, "balnce", "1:1", 23, "5ml"),\
+("Muscle Spasms", false, "balnce", "1:1", 23, "5ml"),\
+("PTSD", false, "balnce", "1:1", 23, "5ml"),\
+("Stress", true, "balnce", "1:1", 27, "10ml"),\
+("Depression", true, "balnce", "1:1", 27, "10ml"),\
+("Fibromyalgia", true, "balnce", "1:1", 27, "10ml"),\
+("Social Phobia", true, "balnce", "1:1", 27, "10ml"),\
+("Multiple Sclerosis", true, "balnce", "1:1", 27, "10ml"),\
+("Muscle Spasms", true, "balnce", "1:1", 27, "10ml"),\
+("PTSD", true, "balnce", "1:1", 27, "10ml"),\
+("Stress", false, "balnce", "1:1", 27, "10ml"),\
+("Depression", false, "balnce", "1:1", 27, "10ml"),\
+("Fibromyalgia", false, "balnce", "1:1", 27, "10ml"),\
+("Social Phobia", false, "balnce", "1:1", 27, "10ml"),\
+("Multiple Sclerosis", false, "balnce", "1:1", 27, "10ml"),\
+("Muscle Spasms", false, "balnce", "1:1", 27, "10ml"),\
+("PTSD", false, "balnce", "1:1", 27, "10ml"),\
+("Stress", true, "balnce", "1:1", 20, "2.5ml"),\
+("Depression", true, "balnce", "1:1", 20, "2.5ml"),\
+("Fibromyalgia", true, "balnce", "1:1", 20, "2.5ml"),\
+("Social Phobia", true, "balnce", "1:1", 20, "2.5ml"),\
+("Multiple Sclerosis", true, "balnce", "1:1", 20, "2.5ml"),\
+("Muscle Spasms", true, "balnce", "1:1", 20, "2.5ml"),\
+("PTSD", true, "balnce", "1:1", 20, "2.5ml"),\
+("Stress", false, "balnce", "1:1", 20, "2.5ml"),\
+("Depression", false, "balnce", "1:1", 20, "2.5ml"),\
+("Fibromyalgia", false, "balnce", "1:1", 20, "2.5ml"),\
+("Social Phobia", false, "balnce", "1:1", 20, "2.5ml"),\
+("Multiple Sclerosis", false, "balnce", "1:1", 20, "2.5ml"),\
+("Muscle Spasms", false, "balnce", "1:1", 20, "2.5ml"),\
+("PTSD", false, "balnce", "1:1", 20, "2.5ml"),\
+("OCD", true, "cbd", "3:1", 23, "5ml"),\
+("Anxiety Disorder", true, "cbd", "3:1", 23, "5ml"),\
+("Crohn's", true, "cbd", "3:1", 23, "5ml"),\
+("Dravet Syndrome", true, "cbd", "3:1", 23, "5ml"),\
+("Lennox-Gastraut Syndrome", true, "cbd", "3:1", 23, "5ml"),\
+("Acne Vulgaris", true, "cbd", "3:1", 23, "5ml"),\
+("Epilepsy", true, "cbd", "3:1", 23, "5ml"),\
+("Psychosis", true, "cbd", "3:1", 23, "5ml"),\
+("Schizophrenia",true, "cbd", "3:1", 23, "5ml"),\
+("OCD", false, "cbd", "15:1", 23, "5ml"),\
+("Anxiety Disorder", false, "cbd", "15:1", 23, "5ml"),\
+("Crohn's", false, "cbd", "15:1", 23, "5ml"),\
+("Dravet Syndrome", false, "cbd", "15:1", 23, "5ml"),\
+("Lennox-Gastraut Syndrome", false, "cbd", "15:1", 23, "5ml"),\
+("Acne Vulgaris", false, "cbd", "15:1", 23, "5ml"),\
+("Epilepsy", false, "cbd", "15:1", 23, "5ml"),\
+("Psychosis", false, "cbd", "15:1", 23, "5ml"),\
+("Schizophrenia",false, "cbd", "15:1", 23, "5ml")
+("OCD", true, "cbd", "3:1", 20, "2.5ml"),\
+("Anxiety Disorder", true, "cbd", "3:1", 20, "2.5ml"),\
+("Crohn's", true, "cbd", "3:1", 20, "2.5ml"),\
+("Dravet Syndrome", true, "cbd", "3:1", 20, "2.5ml"),\
+("Lennox-Gastraut Syndrome", true, "cbd", "3:1", 20, "2.5ml"),\
+("Acne Vulgaris", true, "cbd", "3:1", 20, "2.5ml"),\
+("Epilepsy", true, "cbd", "3:1", 20, "2.5ml"),\
+("Psychosis", true, "cbd", "3:1", 20, "2.5ml"),\
+("Schizophrenia",true, "cbd", "3:1", 20, "2.5ml"),\
+("OCD", false, "cbd", "15:1", 20, "2.5ml"),\
+("Anxiety Disorder", false, "cbd", "15:1", 20, "2.5ml"),\
+("Crohn's", false, "cbd", "15:1", 20, "2.5ml"),\
+("Dravet Syndrome", false, "cbd", "15:1", 20, "2.5ml"),\
+("Lennox-Gastraut Syndrome", false, "cbd", "15:1", 20, "2.5ml"),\
+("Acne Vulgaris", false, "cbd", "15:1", 20, "2.5ml"),\
+("Epilepsy", false, "cbd", "15:1", 20, "2.5ml"),\
+("Psychosis", false, "cbd", "15:1", 20, "2.5ml"),\
+("Schizophrenia",false, "cbd", "15:1", 20, "2.5ml"),\
+("OCD", true, "cbd", "3:1", 27, "10ml"),\
+("Anxiety Disorder", true, "cbd", "3:1", 27, "10ml"),\
+("Crohn's", true, "cbd", "3:1", 27, "10ml"),\
+("Dravet Syndrome", true, "cbd", "3:1", 27, "10ml"),\
+("Lennox-Gastraut Syndrome", true, "cbd", "3:1", 27, "10ml"),\
+("Acne Vulgaris", true, "cbd", "3:1", 27, "10ml"),\
+("Epilepsy", true, "cbd", "3:1", 27, "10ml"),\
+("Psychosis", true, "cbd", "3:1", 27, "10ml"),\
+("Schizophrenia",true, "cbd", "3:1", 27, "10ml"),\
+("OCD", false, "cbd", "15:1", 27, "10ml"),\
+("Anxiety Disorder", false, "cbd", "15:1", 27, "10ml"),\
+("Crohn's", false, "cbd", "15:1", 27, "10ml"),\
+("Dravet Syndrome", false, "cbd", "15:1", 27, "10ml"),\
+("Lennox-Gastraut Syndrome", false, "cbd", "15:1", 27, "10ml"),\
+("Acne Vulgaris", false, "cbd", "15:1", 27, "10ml"),\
+("Epilepsy", false, "cbd", "15:1", 27, "10ml"),\
+("Psychosis", false, "cbd", "15:1", 27, "10ml"),\
+("Schizophrenia",false, "cbd", "15:1", 27, "10ml")`
 
 
 
