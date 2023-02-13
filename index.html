@@ -214,15 +214,11 @@
   const diseasesList = ["Nociceptive", "Noxious Pain", "Opioid Dependancy", "Alzeihmer's with agitation", "Tics", "Tourerre's", "HRV", "AIDS", "Insomania", "Cachexia", "Osteoarthritis", "Stress", "Depression", "Fibromyalgia", "Social Phobia", "Multiple Sclerosis", "Muscle Spasms", "PTSD", "OCD", "Anxiety Disorder", "Crohn's", "Dravet Syndrome", "Lennox-Gastraut Syndrome", "Acne Vulgaris", "Epilepsy", "Psychosis", "Schizophrenia"];
 
 
-  var createTableString = 'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (disease, cannabis_experience, cannabis_type, ratio)'
+  var createTableString = 'CREATE TABLE IF NOT EXISTS "RetioConfigurator" (disease, cannabis_experience, cannabis_type, ratio, bmi, age ,quantity)'
 
 
-  var insertString = 'insert into "RetioConfigurator"(disease,cannabis_experience,cannabis_type,ratio) \
-      values("PTSD", false,"cbd","3:1"),\
-      ("PTSD", true,"cbd","15:1"),\
-      ("PTSD", false,"cbd","3:1"),\
-      ("insomenia", true,"thc","15:1"),\
-      ("insomenia", false,"thc","3:1")'
+  var insertString = `insert into "RetioConfigurator"(disease,cannabis_experience,cannabis_type,ratio) \
+      values("Nociceptive", true, "thc", "15:1"),("Noxious Pain", true, "thc", "15:1"),("Opioid Dependancy", true, "thc", "15:1"),("Alzeihmer's with agitation", true, "thc", "15:1"),("Tics", true, "thc", "15:1"),("Tourerre's", true, "thc", "15:1"),("HRV", true, "thc", "15:1"),("AIDS", true, "thc", "15:1"),("Insomania", true, "thc", "15:1"),("Cachexia", true, "thc", "15:1"),("Osteoarthritis", true, "thc", "15:1"),("Nociceptive", false, "thc", "3:1"),("Noxious Pain", false, "thc", "3:1"),("Opioid Dependancy", false, "thc", "3:1"),("Alzeihmer's with agitation", false, "thc", "3:1"),("Tics", false, "thc", "3:1"),("Tourerre's", false, "thc", "3:1"),("HRV", false, "thc", "3:1"),("AIDS", false, "thc", "3:1"),("Insomania", false, "thc", "3:1"),("Cachexia", false, "thc", "3:1"),("Osteoarthritis", false, "thc", "3:1"),("Stress", true, "balnce", "1:1"),("Depression", true, "balnce", "1:1"),("Fibromyalgia", true, "balnce", "1:1"),("Social Phobia", true, "balnce", "1:1"),("Multiple Sclerosis", true, "balnce", "1:1"),("Muscle Spasms", true, "balnce", "1:1"),("PTSD", true, "balnce", "1:1"),("Stress", false, "balnce", "1:1"),("Depression", false, "balnce", "1:1"),("Fibromyalgia", false, "balnce", "1:1"),("Social Phobia", false, "balnce", "1:1"),("Multiple Sclerosis", false, "balnce", "1:1"),("Muscle Spasms", false, "balnce", "1:1"),("PTSD", false, "balnce", "1:1"),("OCD", true, "cbd", "3:1"),("Anxiety Disorder", true, "cbd", "3:1"),("Crohn's", true, "cbd", "3:1"),("Dravet Syndrome", true, "cbd", "3:1"),("Lennox-Gastraut Syndrome", true, "cbd", "3:1"),("Acne Vulgaris", true, "cbd", "3:1"),("Epilepsy", true, "cbd", "3:1"),("Psychosis", true, "cbd", "3:1"),("Schizophrenia",true, "cbd", "3:1"),("OCD", false, "cbd", "15:1"),("Anxiety Disorder", false, "cbd", "15:1"),("Crohn's", false, "cbd", "15:1"),("Dravet Syndrome", false, "cbd", "15:1"),("Lennox-Gastraut Syndrome", false, "cbd", "15:1"),("Acne Vulgaris", false, "cbd", "15:1"),("Epilepsy", false, "cbd", "15:1"),("Psychosis", false, "cbd", "15:1"),("Schizophrenia",false, "cbd", "15:1")`
 
 
 
@@ -236,13 +232,20 @@
 
   }
 
-  // function cannabisRecommendation(input) {
-  //   var symptoms = input.Symptom;
-  //   var disease = input.Disease;
-  //   var age = input.Age
-  //   var cannabisExperience = input["Cannabis experience"];
-  //   console.log('input["Cannabis experience"]', input["Cannabis experience"]);
-  //   bmi = input.Weight / ((input.Height / 100) ** 2)
+  function cannabisRecommendation(input) {
+    var symptoms = input.Symptom;
+    var disease = input.Disease;
+    var age = input.Age
+    var cannabisExperience = input["Cannabis experience"] == 'yes'? true : false ;
+    var bmi = input.Weight / ((input.Height / 100) ** 2)
+    console.log(bmi);
+    var query = `SELECT * from "RetioConfigurator" WHERE disease=${disease} AND cannabis_experience=${cannabisExperience}`
+
+ 
+
+
+
+    
   //   // var defaultQuentity = 5
   //   // if (symptoms["Pain"] >= 7 || symptoms["Anxiety"] >= 7 || symptoms["Sleep"] < 5 || bmi > 27) {
   //   //   defaultQuentity * 2
@@ -251,19 +254,18 @@
   //   //   defaultQuentity / 2
   //   // }
 
-  // }
+  }
 
   function getBestCannabisTreatmentForPatient(age, gender, height, weight, disease, pain, sleep, anxiety) {
     let radioButton = document.querySelector('input[name="cannabis_experience"]:checked');
     let cannabisExperience = radioButton.value;
+    console.log(cannabisExperience);
     var userAnswer = { "Age:": age, "Gender": gender, "Height": height, "Weight": weight, "Disease": disease, "Cannabis experience": cannabisExperience, "Symptom": { "Pain": pain, "Sleep": sleep, "Anxiety": anxiety } }
     console.log(userAnswer);
-    // cannabisRecommendation(userAnswer)
+    cannabisRecommendation(userAnswer)
     // return cannabisRecommendation(userAnswer)
-    return userAnswer
   }
 
-  // function cannabisRecommendation(userAnswer)
 
     
     
